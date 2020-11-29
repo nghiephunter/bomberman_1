@@ -73,23 +73,27 @@ class Bricks extends Wall {
   }
 }
 
+
 class Player extends Entity {
   constructor(game, x, y, grid) {
-    super(game, x, y, grid, 1);
-
+    
+    super(game, x, y, grid, 6);
+    
     this.controls = this.game.input.keyboard.createCursorKeys();
     this.speed = 150;
 
     this.totalBombs = 1;
     this.currentBombs = 0;
     this.bombSize = 2;
+    
 
     this.body.setCircle(16);
-    this.body.drag.set(768);
+    this.body.drag.set(1000);
 
     this.lastGridPos = this.gridPos.clone();
 
     //this.blastThrough = true;
+    
 
   }
   update() {
@@ -122,6 +126,7 @@ class Player extends Entity {
       this.lastGridPos.copyFrom(this.gridPos);
       this.checkGrid();
     }
+  
   }
 
   kill() {
@@ -156,7 +161,7 @@ class Player extends Entity {
 
 class Bot extends Entity {
   constructor(game, x, y, grid) {
-    super(game, x, y, grid, 5);
+    super(game, x, y, grid, 2);
 
     //this.speed = 96;
 
@@ -191,7 +196,7 @@ class Pickup extends Entity {
 
 class PickupBomb extends Pickup {
   constructor(game, x, y, grid) {
-    super(game, x, y, grid, 8);
+    super(game, x, y, grid, 7);
   }
 
   collect(player) {
@@ -202,7 +207,7 @@ class PickupBomb extends Pickup {
 
 class PickupFire extends Pickup {
   constructor(game, x, y, grid) {
-    super(game, x, y, grid, 9);
+    super(game, x, y, grid, 8);
   }
 
   collect(player) {
@@ -253,7 +258,7 @@ class Bomb extends Entity {
 }
 
 class Explosion extends Entity {
-  constructor(game, x, y, grid, owner, size = 3, parent = null) {
+  constructor(game, x, y, grid, owner, size = 0, parent = null) {
     super(game, x, y, grid, 5);
     this.size = size;
     this.owner = owner;
